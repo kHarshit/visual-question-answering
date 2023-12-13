@@ -1,14 +1,21 @@
 from flask import Flask, request, render_template
 import base64
+from PIL import Image
 from io import BytesIO
 
 app = Flask(__name__)
 
 def convert_image_to_base64(image):
-    buffer = BytesIO()
-    image.save(buffer, format="JPEG")
-    buffer.seek(0)
-    image_base64 = base64.b64encode(buffer.getvalue()).decode()
+    pil_img = Image.open(image)
+    # Convert RGBA to RGB if the image has an alpha channel
+    if pil_img.mode == 'RGBA':
+        pil_img = pil_img.convert('RGB')
+
+    img_buffer = BytesIO()
+    pil_img.save(img_buffer, format='JPEG')
+    img_buffer.seek(0)
+
+    image_base64 = base64.b64encode(img_buffer.getvalue()).decode()
     return f"data:image/jpeg;base64,{image_base64}"
 
 @app.route('/', methods=['GET', 'POST'])
