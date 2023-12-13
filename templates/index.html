@@ -4,30 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visual Question Answering System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h2>Visual Question Answering System</h2>
-    <form action="/" method="post" enctype="multipart/form-data">
-        <label for="image">Upload an image:</label>
-        <input type="file" id="image" name="image" required><br><br>
-        
-        <label for="question">Enter your question:</label>
-        <input type="text" id="question" name="question" required><br><br>
-        
-        <input type="submit" value="Get Answer">
-    </form>
+    <div class="container">
+        <h2>Visual Question Answering System</h2>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <label for="image">Upload an image:</label>
+            <input type="file" id="image" name="image" required><br><br>
+            
+            <label for="question">Enter your question:</label>
+            <input type="text" id="question" name="question" required><br><br>
+            
+            <input type="submit" value="Get Answer">
+        </form>
 
-    {% if answer %}
-        <h3>Your Uploaded Image:</h3>
-        {% if image_data %}
-            <img src="{{ image_data }}" alt="Uploaded Image" style="max-width: 500px;"><br><br>
+        {% if answer %}
+            <div id="result">
+                <h3>Your Uploaded Image:</h3>
+                {% if image_data %}
+                    <img id="uploaded-image" src="{{ image_data }}" alt="Uploaded Image"><br><br>
+                {% endif %}
+
+                <h3>Your Question:</h3>
+                <p>{{ question }}</p>
+
+                <div id="answer">
+                    <h3>Answer:</h3>
+                    <p>{{ answer }}</p>
+                </div>
+            </div>
         {% endif %}
-
-        <h3>Your Question:</h3>
-        <p>{{ question }}</p>
-
-        <h3>Answer:</h3>
-        <p>{{ answer }}</p>
-    {% endif %}
+    </div>
 </body>
 </html>
