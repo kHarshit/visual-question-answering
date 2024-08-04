@@ -1,5 +1,6 @@
-# visual-question-answering
-Visual Question Answering System using ViT, GPT, BERT (LLMs)
+# Multimodal Visual Question Answering
+
+Visual Question Answering System using ViT, GPT, BERT, CLIP (LLMs/VLMs)
 
 Tasks and questions to ponder:
 1. Late Fusion - process modalities separtely through Language or Vision models then merge their outputs
@@ -8,6 +9,13 @@ Tasks and questions to ponder:
 4. Can we utilize pre-trained VLM such as BLIP or MiniGPT (simiar to late fusion)?
 
 ![VQA page](./vqa_page.png)
+
+## Models 
+
+1. **BERT (Bidirectional Encoder Representations from Transformers)**: Encoder-only language model trained on masked language modeling (MLM) and next sentence prediction (NSP).
+2. **ViT (Vision Transformer)**: Encoder-only vision model that treats image patches as tokens for efficient image processing.
+3. **GPT-2 (Generative Pre-trained Transformer 2)**: Decoder-only language model designed for coherent text generation.
+4. **CLIP (Contrastive Language-Image Pre-training)**: Model jointly trained an image and text encoder to understand and align visual and textual data in a shared latent space.
 
 ## Late Fusion Model (Classification)
 
