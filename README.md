@@ -15,3 +15,19 @@ Create conda env
 ```
 conda env create -f environment.yml
 ```
+
+
+Using docker
+
+```
+# run app
+python app.py
+
+# use docker
+transformers-cli serve --task=fill-mask --model=bert-base-uncased
+
+curl -X POST http://localhost:8888/forward -H "accept: application/json" -H "Content-Type: application/json" -d '{"inputs": "Today is going to be a [MASK] day"}' | jq
+
+docker build --platform linux/amd64 -t vqa:v1 .
+# check port from docker ps and use the curl command to get output
+```
