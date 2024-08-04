@@ -19,6 +19,8 @@ Tasks and questions to ponder:
 
 ## Late Fusion Model (Classification)
 
+![vqa_classification.ipynb](./vqa_classification.ipynb)
+
 The late fusion model for Visual Question Answering (VQA) treats the task as a classification problem. It uses separate encoders for text and image inputs, which are fused together before making a classification prediction.
 
 Architecture:
@@ -30,6 +32,8 @@ Architecture:
 
 
 ## Generation Model
+
+![vqa_generation.ipynb](./vqa_generation.ipynb)
 
 The generation model treats VQA as a sequence generation problem. It integrates separate encoders for text and image inputs and uses a decoder to generate textual answers.
 
