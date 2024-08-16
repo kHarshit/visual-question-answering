@@ -91,7 +91,9 @@ class MultimodalVQAModel(nn.Module):
         return out
 
 model = MultimodalVQAModel()
-model.to(device)
+# We use the checkpoint giving best results
+model.load_state_dict(torch.load(os.path.join("..", "checkpoint", "bert_vit", "checkpoint-1500", "pytorch_model.bin")))
+model.to(device) 
 model.eval()
 
 def preprocess_image(image_path):
