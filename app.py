@@ -9,6 +9,7 @@ app = Flask(__name__)
 vqa_pipeline = pipeline("visual-question-answering")
 
 inference_script = """
+# testing this requires gpu and trained weights.
 #!/usr/bin/env python
 # coding: utf-8
 
