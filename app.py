@@ -8,6 +8,63 @@ app = Flask(__name__)
 
 vqa_pipeline = pipeline("visual-question-answering")
 
+inference_script = """
+#!/usr/bin/env python
+# coding: utf-8
+
+import os
+import torch
+from transformers import AutoTokenizer, AutoModel
+from PIL import Image
+
+# Set device
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+print(f"Using device: {device}")
+
+# Load the tokenizer and model
+tokenizer = AutoTokenizer.from_pretrained("MODEL_NAME")
+model = AutoModel.from_pretrained("MODEL_NAME")
+model.to(device)
+model.eval()
+
+def preprocess_image(image_path):
+    # Load and preprocess the image
+    image = Image.open(image_path)
+    # Include any image preprocessing here
+    return image
+
+def preprocess_text(question):
+    # Tokenize the question
+    inputs = tokenizer(question, return_tensors="pt")
+    return inputs
+
+def predict(image_path, question):
+    # Preprocess inputs
+    image = preprocess_image(image_path)
+    inputs = preprocess_text(question)
+
+    # Move inputs to device
+    inputs = {k: v.to(device) for k, v in inputs.items()}
+
+    # Inference
+    with torch.no_grad():
+        outputs = model(**inputs)
+    
+    # Process outputs
+    # (Add your own logic here to interpret model outputs)
+    logits = outputs.logits
+    prediction = torch.argmax(logits, dim=-1)
+
+    return prediction
+
+if __name__ == "__main__":
+    # Example usage
+    image_path = "path_to_image.jpg"
+    question = "What is in the image?"
+    prediction = predict(image_path, question)
+    print(f"Prediction: {prediction}")
+"""
+
 def convert_image_to_base64(image):
     pil_img = Image.open(image)
     # Convert RGBA to RGB if the image has an alpha channel
