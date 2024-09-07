@@ -23,6 +23,8 @@ Tasks and questions to ponder:
 
 The late fusion model for Visual Question Answering (VQA) treats the task as a classification problem. It uses separate encoders for text and image inputs, which are fused together before making a classification prediction.
 
+![late_fusion_classification](late_fusion_classification.png)
+
 Architecture:
 
 * Text Encoder: Pre-trained BERT model (bert-base-uncased).
@@ -37,6 +39,7 @@ Architecture:
 
 The generation model treats VQA as a sequence generation problem. It integrates separate encoders for text and image inputs and uses a decoder to generate textual answers.
 
+![late_fusion_generation](late_fusion_generation.png)
 Architecture:
 
 * Text Encoder: Pre-trained BERT model (bert-base-uncased).
